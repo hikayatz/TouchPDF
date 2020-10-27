@@ -1,6 +1,6 @@
 # TouchPDF
 TouchPDF is a simple web PDF viewer for jQuery. It is based on the pdf.js library and support mobile gestures for swiping pages and zooming.
-
+base on http://touchpdf.net
 ## Features
 -	Use finger to swipe to next or previous page
 -	Pinch to zoom in and out
@@ -19,7 +19,7 @@ Check out the online demo at: http://touchpdf.net/demo/index.htm
 ###Get the jQuery plugin
 To get a local copy of the plugin, clone it using git:
 ````bash
-$ git clone git:// github.com/loicminghetti/touchpdf.git touchpdf
+$ git clone https://github.com/hikayatz/touchpdf.git touchpdf
 $ cd touchpdf
 ````
 Note: you need to start a local web server as some browsers don't allow opening PDF files for a file:// url.
@@ -57,6 +57,11 @@ You ca also add bookmarks tabs to your PDF display:
 $(function() {      
   $("#myPDF").pdf( {
     source: "demo.pdf",
+   errorCallback: function (error) {
+      console.log(error)
+   },
+   errorHTML: "Cannot Load...",
+   errorHtmlImg: "https://www.systoolsgroup.com/updates/wp-content/uploads/2018/12/feature-word-error.png",
     tabs: [
       {title: "Tab 1", page: 2, color: "orange"},
       {title: "Tab 2", page: 3, color: "green"},
@@ -87,8 +92,12 @@ changed | *function* | null | A handler triggered each time a new page is displa
 loadingHTML | *string* | "Loading PDF" | Text or HTML displayed on white page shown before document is loaded.
 loadingHeight | *int* | 841 | Height in px of white page shown before document is loaded (default is A4 height).
 loadingWidth | *int* | 595 | Width in px of white page shown before document is loaded (default is A4 width).
+errorHTML | *string* | "Loading PDF" | Text or HTML displayed when pdf can not load
+errorHtmlImg | *string* | "Url image icon" | Image show display when pdf can not load
+errorCallback | *function* | null | A handler triggered when pdf can not load
+pdfViewMinHeight | *int* | 300 | Width in px of pdf render in screen.
 
-###Tab attributes
+### Tab attributes
 
 Each tab must be defined using a json object with the following attributes:
 
